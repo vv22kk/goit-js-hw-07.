@@ -1,4 +1,33 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
-ccvcv;
-console.log(galleryItems);
+
+const galleryEl = document.querySelector('.gallery');
+galleryEl.addEventListener('click', GaleryClick);
+
+function createGalerry(arr) {
+  return arr
+    .map(
+      ({ preview, original, description }) =>
+        `<li class="gallery__item">
+  <a class="gallery__link" href="${original}">
+    <img
+      class="gallery__image"
+      src="${preview}"
+      data-source="${original}"
+      alt="${description}"
+    />
+  </a>
+</li>`,
+    )
+    .join('');
+}
+galleryEl.insertAdjacentHTML('beforeend', createGalerry(galleryItems));
+
+function GaleryClick(event) {
+  event.preventDefault();
+  const targetClickImageOriginalSize = event.target.dataset.source;
+  const instance = basicLightbox.create(
+    `<img src = "${targetClickImageOriginalSize}">`,
+  );
+  instance.show();
+}
