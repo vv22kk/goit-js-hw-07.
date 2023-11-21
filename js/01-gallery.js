@@ -9,7 +9,7 @@ function createGalerry(arr) {
     .map(
       ({ preview, original, description }) =>
         `<li class="gallery__item">
-  <a class="gallery__link" href="${original}">
+  <a class="gallery__link" href="${original}" alt="${description}">
     <img
       class="gallery__image"
       src="${preview}"
@@ -25,9 +25,19 @@ galleryEl.insertAdjacentHTML('beforeend', createGalerry(galleryItems));
 
 function GaleryClick(event) {
   event.preventDefault();
+  if (!event.target.classList.contains('gallery__image')) {
+    return;
+  }
   const targetClickImageOriginalSize = event.target.dataset.source;
   const instance = basicLightbox.create(
     `<img src = "${targetClickImageOriginalSize}">`,
   );
   instance.show();
+
+  const closeModal = e => {
+    if (e.key === 'Escape') {
+      instance.close();
+    }
+  };
+  document.addEventListener('keydown', closeModal);
 }
