@@ -41,7 +41,7 @@ function GaleryClick(event) {
     if (e.key === 'Escape') {
       instance.close();
     }
-    console.log(123);
+    // console.log(123);
     document.removeEventListener('keydown', closeModal);
   };
   document.addEventListener('keydown', closeModal);
