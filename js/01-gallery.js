@@ -27,7 +27,7 @@ galleryEl.insertAdjacentHTML('beforeend', createGalerry(galleryItems));
 //create-modal-Original-Size (basicLightbox)
 function GaleryClick(event) {
   event.preventDefault();
-  if (!event.target.classList.contains('gallery__image')) {
+  if (event.target.nodeName !== 'IMG') {
     return;
   }
 
@@ -41,6 +41,8 @@ function GaleryClick(event) {
     if (e.key === 'Escape') {
       instance.close();
     }
+    console.log(123);
+    document.removeEventListener('keydown', closeModal);
   };
   document.addEventListener('keydown', closeModal);
 }
